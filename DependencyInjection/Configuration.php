@@ -17,8 +17,6 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $defaults = $this->getJsoneditorDefaults();
-
         $treeBuilder = new TreeBuilder();
 
         return $treeBuilder
