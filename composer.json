@@ -17,14 +17,6 @@
         "symfony/framework-bundle": ">=2.1,<2.3-dev",
         "symfony/security-bundle": ">=2.1,<2.3-dev"
     },
-    "require-dev": {
-        "twig/twig": "*",
-        "doctrine/doctrine-bundle": "*",
-        "swiftmailer/swiftmailer": "*",
-        "willdurand/propel-typehintable-behavior": "dev-master",
-        "symfony/yaml": "2.1.*",
-        "symfony/validator": "2.1.*"
-    },
     "autoload": {
         "psr-0": { "Jlaso\\JsoneditorBundle": "" }
     },
