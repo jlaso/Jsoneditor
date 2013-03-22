@@ -1,0 +1,17 @@
+{% if jquery_cdn %}
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+{% endif %}
+
+<script type="text/javascript" src="{{ asset([base_url,'bundles/jlasojsoneditor/js/json2.js']|join) }}"></script>
+<script type="text/javascript" src="{{ asset([base_url,'bundles/jlasojsoneditor/js/jquery.jsoneditor.j']|join) }}"></script>
+<script type="text/javascript" src="{{ asset([base_url,'bundles/jlasojsoneditor/js/jsoneditor.js']|join) }}"></script>
+
+{#
+<script type="text/javascript">
+//<![CDATA[
+    $(function(){
+
+    })
+//]]>
+</script>
+#}
