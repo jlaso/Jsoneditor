@@ -82,7 +82,13 @@ Add script to your templates/layout at the bottom of your page (for faster page 
 ```
 
 
-//app/config/jlaso_jsoneditor.ini
+```
+# app/config/config.yml
+twig:
+    form:
+        resources:
+            - 'JlasoJsoneditorBundle:Form:fields.html.twig'
+```
 
 
 ## Localization

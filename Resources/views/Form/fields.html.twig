@@ -1,0 +1,34 @@
+{# Jlaso/JsonBundle/Resources/views/Form/fields.html.twig #}
+{% block jlaso_json_editor_widget %}
+    {% spaceless %}
+        {# true field that are stored in DB #}
+        <pre>{{ value|raw }}</pre>
+        <input type="hidden" name="{{ id }}" id="{{ id }}" value=""/>
+        {# pretty json format #}
+        <div id="json_editor_{{ id }}" class="json-editor"></div>
+        <script type="text/javascript">
+            var json_{{ id }} = {{ value|raw }} || {
+                "string": "foo",
+                "number": 5,
+                "array": [1, 2, 3],
+                "object": {
+                    "property": "value",
+                    "subobj": {
+                        "arr": ["foo", "ha"],
+                        "numero": 1
+                    }
+                }
+            };
+            $('#{{ id }}').val(json_{{ id }});
+            {# behaviour for json editor and associates with true field #}
+            $('#json_editor_{{ id }}').jsonEditor(
+                    json_{{ id }},
+                    {
+                        change: function(){
+                            $('#{{ id }}').val(JSON.stringify(json_{{ id }}));
+                        }
+                    }
+            );
+        </script>
+    {% endspaceless %}
+{% endblock %}

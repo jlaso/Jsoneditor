@@ -59,7 +59,7 @@ class JlasoJsoneditorExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'jsoneditor_init' => new \Twig_Function_Method($this, 'jsoneditor_init', array('is_safe' => array('html')))
+            'jsoneditor_init'  => new \Twig_Function_Method($this, 'jsoneditor_init',  array('is_safe' => array('html'))),
         );
     }
 
@@ -95,7 +95,6 @@ class JlasoJsoneditorExtension extends \Twig_Extension
                     ->render('JlasoJsoneditorBundle:Script:init.html.twig',
             array(
                 'jsoneditor_config' => json_encode($config),
-                'jquery_adapter'    => $config['jquery_adapter'],
                 'jquery_cdn'        => $config['jquery_cdn'],
                 'base_url'          => $baseURL,
             ));
