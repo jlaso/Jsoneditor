@@ -1,34 +1,62 @@
 {# Jlaso/JsonBundle/Resources/views/Form/fields.html.twig #}
 {% block jlaso_json_editor_widget %}
     {% spaceless %}
-        {# true field that are stored in DB #}
-        <pre>{{ value|raw }}</pre>
-        <input type="hidden" name="{{ id }}" id="{{ id }}" value=""/>
+        <input type="text" name="{{ full_name }}" id="{{ id }}" value=""/>
         {# pretty json format #}
-        <div id="json_editor_{{ id }}" class="json-editor"></div>
+        <div id="json_editor_{{ id }}" class="json-editor">
+            {#
+            {% for key,value in value %}
+                <div class="string">
+
+                </div>
+            {% endfor %}
+            #}
+        </div>
+        {# button add new element #}
+        {% if form.vars.allow_add %}
+            <div class="json-editor">
+                <div class="item string" >
+                    <input type="text" class="property" id="new_{{ id }}"/>
+                    <input type="text" class="value" id="value_{{ id }}"/>
+                    <a href="#" id="btn_add_{{ id }}" class="btn"><i class="icon-plus"></i></a>
+                </div>
+            </div>
+        {% endif %}
         <script type="text/javascript">
-            var json_{{ id }} = {{ value|raw }} || {
-                "string": "foo",
-                "number": 5,
-                "array": [1, 2, 3],
-                "object": {
-                    "property": "value",
-                    "subobj": {
-                        "arr": ["foo", "ha"],
-                        "numero": 1
-                    }
-                }
-            };
-            $('#{{ id }}').val(json_{{ id }});
+            var json_{{ id }} = '{{ value|raw }}' || {};
             {# behaviour for json editor and associates with true field #}
-            $('#json_editor_{{ id }}').jsonEditor(
-                    json_{{ id }},
+            function update_json_{{ id }}(json){
+                $('#{{ id }}').val(JSON.stringify(json));
+                $('#json_editor_{{ id }}').jsonEditor(
+                    json,
                     {
                         change: function(){
-                            $('#{{ id }}').val(JSON.stringify(json_{{ id }}));
+                            $('#{{ id }}').val(JSON.stringify(json));
                         }
                     }
-            );
+                );
+            };
+            update_json_{{ id }}(json_{{ id }});
+            {% if form.vars.allow_add %}
+                {# behaviour for add new key/value pair #}
+                $('#btn_add_{{ id }}').click(function(e){
+                    var val = $('#{{ id }}').val();
+
+                    if (val) {
+                        try { json = JSON.parse(val); }
+                        catch (e) { alert('Error in parsing json. ' + e); }
+                    } else {
+                        json = {};
+                    }
+                    var index = $('#new_{{ id }}').val();
+                    var value = $('#value_{{ id }}').val();
+                    console.log(json);
+                    json[index] = value;
+                    console.log(json);
+
+                    update_json_{{ id }}(json);
+                });
+            {% endif %}
         </script>
     {% endspaceless %}
 {% endblock %}
